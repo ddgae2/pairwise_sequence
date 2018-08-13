@@ -1,5 +1,5 @@
 % pair-wise alignment amino acid/DNA and correlation analysis 
-% copyright UCSF 2018
+% copyright UCDAVIS 2015
 % David Gae
 % eg. align_pairwise('seq1','seq2',0.8,0,-0.8,0)
 function align_pairwise = align_pairwise(seq1,seq2,a,b,c,d)

@@ -1,6 +1,6 @@
 # pairwise_sequence calculator 
 
-Running sequence comparision analysis:
+Run sequence comparision analysis:
 
 1) align_pairwise('seq1','seq2',0.8,0,-0.8,0)
 

@@ -1,4 +1,4 @@
-pairwise_sequence
+# pairwise_sequence calculator 
 
 Running sequence comparision analysis:
 

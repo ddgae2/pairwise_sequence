@@ -1,8 +1,8 @@
 % pair-wise alignment amino acid/DNA and correlation analysis 
 % copyright UCDAVIS 2015
 % David Gae
-% eg. align_pairwise('seq1','seq2',0.8,0,-0.8,0)
-function align_pairwise = align_pairwise(seq1,seq2,a,b,c,d)
+% eg. align_pairwise('seq1',score,0.8,0,-0.8,0)
+function align_pairwise = align_pairwise(seq1,score,a,b,c,d)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % david gae 2/21/12 UC DAVIS. 
@@ -22,7 +22,7 @@ function align_pairwise = align_pairwise(seq1,seq2,a,b,c,d)
 % version5- linear regression fit and r2
 % version6- p-value.
 
-[value, amin]= textread('Chotvol.txt', '%f %c', 20);
+[value, amin]= textread(score, '%f %c', 20);
 %[value, amin]= textread('janin.txt', '%f %c', 20)
 %[value, amin]= textread('rose.txt', '%f %c', 20)
 %convert column to row string
@@ -36,7 +36,7 @@ seq2 = fopen('seq2','rt');
 
 %location of seq char
 seq_a= char();
-seq_b= char();
+%seq_b= char();
 
 %initalize
 nrows=0;ncols=0;cna=0;
@@ -53,27 +53,26 @@ rseq1 = fgetl(seq1);
 			rseq1= fgetl(seq1);
 			[nrows,ncols] =size(rseq1);
 	end;
+fclose(seq1);
 
 %store seq_b
-rseq2= fgetl(seq2);
-
-	while (ischar(rseq2))
-
-     cna1 = cna1+1;
-
-			seq_b(cna1,1:length(rseq2)) = rseq2; %store string of eachline
-			rseq2= fgetl(seq2);
-			[nrows1,ncols1] =size(rseq2);
-	end;
-    
-fclose(seq1);
-fclose(seq2);
+%rseq2= fgetl(seq2);
+%
+%	while (ischar(rseq2))
+%
+%    cna1 = cna1+1;
+%
+%			seq_b(cna1,1:length(rseq2)) = rseq2; %store string of eachline
+%			rseq2= fgetl(seq2);
+%			[nrows1,ncols1] =size(rseq2);
+%	end;
+%fclose(seq2);
 
 
 %initialize
 z=0;cnt=0;
 fi = 0;
-fj = 0;
+%fj = 0;
 % determine the length of rows.
 m = 0;
 m = length(seq_a(1,:));
@@ -111,31 +110,31 @@ num =0;   % counter
 
 %sequence j determine sum(y^2) and sum(y)^2
 
-num =0;   % counter
-	for cnt = 1:length(seq_b(:,m))    % loop for number of rows
-			num = num +1 ;            % count
-					for j = 1:m       % per column/each residue 
-
-						for z = 1:maxamino					   % maxamino = length of 20 amino acid 
-	
-								if seq_b(num,j,:) == amino(z)  % match "seq_b mat" to amino acid value
-			
-									%use for sum[x*y] step
-									fj(num,j) = value(z);	    %value of amino acid info fj
-			
-									%use for correlation (y^2) and (y)^2
-									fjdoub(num,j)= value(z)*value(z); %square of amino acid value
-									
-									%disp(fj);
-									%use for sum[x*y] step
-									fjsum(j) = sum(fj(:,j));
-									fjdoubsum(j) = sum(fjdoub(:,j));	    %sum(y^2)
-									fjsumdoub(j) = sum(fj(:,j))^2;          %sum(y)^2
-
-								end
-						end
-				end
-	end
+%num =0;   % counter
+%	for cnt = 1:length(seq_b(:,m))    % loop for number of rows
+%			num = num +1 ;            % count
+%					for j = 1:m       % per column/each residue
+%
+%						for z = 1:maxamino					   % maxamino = length of 20 amino acid
+%
+%								if seq_b(num,j,:) == amino(z)  % match "seq_b mat" to amino acid value
+%
+%									%use for sum[x*y] step
+%									fj(num,j) = value(z);	    %value of amino acid info fj
+%
+%									%use for correlation (y^2) and (y)^2
+%									fjdoub(num,j)= value(z)*value(z); %square of amino acid value
+%
+%									%disp(fj);
+%									%use for sum[x*y] step
+%									fjsum(j) = sum(fj(:,j));
+%									fjdoubsum(j) = sum(fjdoub(:,j));	    %sum(y^2)
+%									fjsumdoub(j) = sum(fj(:,j))^2;          %sum(y)^2
+%
+%								end
+%						end
+%				end
+%	end
 
 
 
@@ -154,7 +153,7 @@ for ii = 1:m %  length of rows
 				
 								if ii ~= jj && jj > ii					% count only  i !== j
 									
-									pval2 = fj(:,jj);					% column value at position j
+									pval2 = fi(:,jj);					% column value at position j
 
 									%	disp(ii); disp(jj);             %check positon i and j 
 									%   disp(pval1); disp(pval2);       %check physiochemical values at position i and j
@@ -205,14 +204,14 @@ jj=0;
 
 % *****unbiased covariance uses (N-1)******
 %  sum(xy) - sum(x)*sum(y)/N-1
-					covij(ii,jj)= addxy(ii,jj) - ((fisum(ii)*fjsum(jj))/length(pval1(:,1))-1);
+					covij(ii,jj)= addxy(ii,jj) - ((fisum(ii)*fisum(jj))/length(pval1(:,1))-1);
 
-					%disp(addxy(ii,jj) - (fisum(ii)*fjsum(jj))/length(pval1(:,1))-1);
+					%disp(addxy(ii,jj) - (fisum(ii)*fisum(jj))/length(pval1(:,1))-1);
 					%pause;
 					% matlab set double precisions, when multiplying floats.
 
 % *****correlation values  (N-1)********
-					corij1(ii,jj) = covij(ii,jj)/sqrt( (fidoubsum(ii)-(fisumdoub(ii)/length(pval1(:,1))) ) * (fjdoubsum(jj)-(fjsumdoub(jj)/length(pval1(:,1)))) );
+					corij1(ii,jj) = covij(ii,jj)/sqrt( (fidoubsum(ii)-(fisumdoub(ii)/length(pval1(:,1))) ) * (fidoubsum(jj)-(fisumdoub(jj)/length(pval1(:,1)))) );
 					% double creates real and imaginary a+bi.correct only real values. 
 					corij2(ii,jj) = real(corij1(ii,jj));
 			
@@ -311,7 +310,7 @@ varx(ii) = sum((fi(:,ii)-meanx(:,ii)).^2)/(ctotal1(:,ii)-1);	% SS(x-meanx)^2/csu
 		cnt2=0;
 
 		for jj = 1:m %  length of rows 
-			cval2 = fj(:,jj);						% column value at position j
+			cval2 = fi(:,jj);						% column value at position j
 			csum2=0;								% starter counter and reset
 
 				for cnt2 = 1:length(cval2(:,1))				% count number of rows, position j
@@ -322,23 +321,23 @@ varx(ii) = sum((fi(:,ii)-meanx(:,ii)).^2)/(ctotal1(:,ii)-1);	% SS(x-meanx)^2/csu
 				end											% finish counter
 
 					%disp(csum2);							% display counter total for mean
-		totalsum2 =sum(fj(:,jj));							%totalsum of jth position
-		meany(1:length(fj(:,jj)),jj)= totalsum2/csum2;		%mean of jth position within matrix (column via position).
+		totalsum2 =sum(fi(:,jj));							%totalsum of jth position
+		meany(1:length(fi(:,jj)),jj)= totalsum2/csum2;		%mean of jth position within matrix (column via position).
 
 		ctotal2(:,jj)=(csum2);								% store mean counter of column of j
 
 %required for correlation coefficient of set with "real values"
 %use of variance cal
 						for cnt2 = 1:length(cval2(:,1))			% count number of rows, position j
-									if fj(cnt2,jj) == 0.000		% value of row,col- position j
+									if fi(cnt2,jj) == 0.000		% value of row,col- position j
 									meany(cnt2,jj) = 0.000;		% meanx will be zero at position. 
 									%disp(meany);
 									end
 						end
 Svy(:,jj) =  (fi(:,jj) - meany(:,jj));								% (y-meany) value for covariance(x-meanx)*(y-meany)***
-SSy(:,jj) =  ((fj(:,jj)-meany(:,jj)).^2);							% (y-meany)^2 values
-%SSy(:,jj) =  sum((fj(:,jj)-meany(:,jj)).^2);						% sum(y-meany)^2 values
-vary(jj) = sum((fj(:,jj)-meany(:,jj)).^2)/(ctotal2(:,jj)-1);		%( y-meany)^2/csum2-1 (variance values)
+SSy(:,jj) =  ((fi(:,jj)-meany(:,jj)).^2);							% (y-meany)^2 values
+%SSy(:,jj) =  sum((fi(:,jj)-meany(:,jj)).^2);						% sum(y-meany)^2 values
+vary(jj) = sum((fi(:,jj)-meany(:,jj)).^2)/(ctotal2(:,jj)-1);		%( y-meany)^2/csum2-1 (variance values)
 		
 		end
 
@@ -422,7 +421,7 @@ jj=0;
 				
 								if ii ~= jj && jj > ii					% count only  i !== j
 								if (fi(1,ii)==fi(:,ii))					% print out if ROW value of fi = COLUMN value of fi 
-								if (fj(1,jj)==fj(:,jj))					% print out if ROW value of fj = COLUMN value of fj
+								if (fi(1,jj)==fi(:,jj))					% print out if ROW value of fj = COLUMN value of fi
 																		% logical values of TRUE =1 or FALSE = 0
 										Saddxy(ii,jj) =1;				%NEW Sumxy of i,j- values for NEW covariance
 										Sdifx2(ii,jj) =1;				%NEW Sumx of x-meanx column

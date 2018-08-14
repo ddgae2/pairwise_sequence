@@ -32,7 +32,7 @@ maxamino= length(amino);
 fileID1 = fopen('heatmap.csv','w');
 %For nrow,ncol of sequences
 seq1 = fopen('seq1','rt');          		    
-seq2 = fopen('seq2','rt');
+%seq2 = fopen('seq2','rt');
 
 %location of seq char
 seq_a= char();

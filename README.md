@@ -1,6 +1,6 @@
 # pairwise_sequence calculator 
 
-Run sequence comparision at position i and j based on physiochemical score:
+Running sequence comparision at position i and j based on physiochemical score:
 
 1) align_pairwise('seq1','score',0.8,0,-0.8,0) <br>
    [matlab will automatically generate a heatmap] <br>

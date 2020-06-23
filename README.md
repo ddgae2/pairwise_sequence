@@ -13,7 +13,7 @@ Running sequence comparision at position i and j based on physiochemical score: 
     <div></div>
  </div>
 
- (Step1) align_pairwise('seq1','score',0.8,0,-0.8,0) <br>
+ (Step1) align_pairwise('seq1','ChotVol.txt',0.8,0,-0.8,0) <br>
          [matlab will automatically generate a heatmap] <br>
    
  (Step2) run heatmap_raindbow.r to generate Heatmap using ggplot2 <br>

@@ -2,9 +2,9 @@
 
 Running sequence comparision at position i and j based on physiochemical score: <br>
 
- 1)  Average accesible surface values taken from JMB (1978) 124, 357-386. <br>
- 2)  Average Volume per residue taken from Ann. Rev. Biochem. (1984) 53, 537-72. <br>
- 3)  CRASP: a program for analyssi of coordinated substitutions in multiple alignments of protein sequence. Nucleic acids res.     
+ 1)  Average Volume per residue taken from Ann. Rev. Biochem. (1984) 53, 537-72.
+     Cyrus Chothia <br>
+ 2)  CRASP: a program for analyssi of coordinated substitutions in multiple alignments of protein sequence. Nucleic acids res.     
      (2004) W64-W67. <br>
      
  <div>

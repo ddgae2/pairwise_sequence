@@ -5,7 +5,7 @@ Running sequence comparision at position i and j based on physiochemical score: 
  1)  Based on the review by Cyrus Chothia <br>
      Average Volume per residue taken from Ann. Rev. Biochem. (1984) 53, 537-72.<br>
  2)  Matlab code is based on this great paper: Dmitry A. Afonnikov and Nikolay A. Kolchanov. CRASP: a program for analysis of   
-     coordinated substitutions in multiple alignments of protein sequence. Nucleic acids res.(2004) W64-W67.  <br>
+     coordinated substitutions in multiple alignments of protein sequence. Nucleic acids res.(2004) W64-W67.<br>
      
  <div>
     <div></div>

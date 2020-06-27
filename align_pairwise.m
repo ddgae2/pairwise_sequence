@@ -1,24 +1,18 @@
-% pair-wise alignment amino acid/DNA and correlation analysis 
-% copyright UCDAVIS 2015
-% David Gae
 % eg. align_pairwise('seq1',score,0.8,0,-0.8,0)
 function align_pairwise = align_pairwise(seq1,score,a,b,c,d)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% david gae 2/21/12 UC DAVIS. 
+% David Gae 2/21/12 UC DAVIS in computational structural biology lab ( Koehl lab, genome center) 
 %correlation analysis of position- i,j amino acids in multiple sequence alignment. 
 % for string use '%c'
 %physiochemical values are based following papers.
-%1. Volume (Chothia 1984).
-%2. Annu. Rev. Biochem. (1984) 53 537-572.
-%2. Average accessibility surface area (Janin et al. 1978)
-%3. Accessible surface area in the standard state (Rose et al. 1985) Science (1975) 229 834-838
+%1. READ this paper! The structure of proteins: packng of alpha-helices and pleated sheets. you will see that these type of interaction exist in nature.  
+%C. Chothia, M. Levitt and D. Richardson. PNAS. Vol 74. 1977
+%2. Volume (Chothia 1984).
+%3. Annu. Rev. Biochem. (1984) 53 537-572.
 
 
 [value, amin]= textread(score, '%f %c', 20);
-%[value, amin]= textread('janin.txt', '%f %c', 20)
-%[value, amin]= textread('rose.txt', '%f %c', 20)
-%convert column to row string
 amino=transpose(amin);
 maxamino= length(amino);
 
@@ -122,24 +116,6 @@ for ii = 1:m %  length of rows
 	
 					end
 end
-
-
-% Pearsons method of determination%
-% *****unbiased covariance uses (N-1) of only the co-variance******
-%  sum(xy) - sum(x)*sum(y)/N-1
-%  sqrt ( (sum(x^2) - ((sum(x)^2)/N)) - sum((y^2) - ((sum(y)^2)/N)) )
-%determination  covariance and correlation of position i and j
-%determination cov using matlab function as comparsion (my self-check)
-%i=0;
-%j=0;
-%	for i = 1:m 
-%			for j = 2:m
-%	covijmat = cov(fi(:,i),fj(:,j))      % using matlab function covariance
-%	corijmat = corrcoef(fi(:,i),fj(:,j))  % using matlab function correlation
-%	pause;
-%			end
-%	end 
-%
 
 %initialize
 ii=0;

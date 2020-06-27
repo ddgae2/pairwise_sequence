@@ -10,17 +10,10 @@ function align_pairwise = align_pairwise(seq1,score,a,b,c,d)
 % for string use '%c'
 %physiochemical values are based following papers.
 %1. Volume (Chothia 1984).
-%Annu. Rev. Biochem. (1984) 53 537-572.
+%2. Annu. Rev. Biochem. (1984) 53 537-572.
 %2. Average accessibility surface area (Janin et al. 1978)
-%J. Mol. Biol. (1978) 125 357-386
-%3. Accessible surface area in the standard state (Rose et al. 1985)
-%Science (1975) 229 834-838
-% version1- use the longest length of the array with the function "length(seq_a)" for size.
-% .text written with window-based machines has hidden characters. therefore use Jalview to generate fasta file. 
-% version2- use the longest of the rows of the matrix. 
-% version3,4- clean up NaN, inf values to real values and added t-test
-% version5- linear regression fit and r2
-% version6- p-value.
+%3. Accessible surface area in the standard state (Rose et al. 1985) Science (1975) 229 834-838
+
 
 [value, amin]= textread(score, '%f %c', 20);
 %[value, amin]= textread('janin.txt', '%f %c', 20)
@@ -54,19 +47,6 @@ rseq1 = fgetl(seq1);
 			[nrows,ncols] =size(rseq1);
 	end;
 fclose(seq1);
-
-%store seq_b
-%rseq2= fgetl(seq2);
-%
-%	while (ischar(rseq2))
-%
-%    cna1 = cna1+1;
-%
-%			seq_b(cna1,1:length(rseq2)) = rseq2; %store string of eachline
-%			rseq2= fgetl(seq2);
-%			[nrows1,ncols1] =size(rseq2);
-%	end;
-%fclose(seq2);
 
 
 %initialize
@@ -105,38 +85,6 @@ num =0;   % counter
 					end
 			end
 	end
-
-
-
-%sequence j determine sum(y^2) and sum(y)^2
-
-%num =0;   % counter
-%	for cnt = 1:length(seq_b(:,m))    % loop for number of rows
-%			num = num +1 ;            % count
-%					for j = 1:m       % per column/each residue
-%
-%						for z = 1:maxamino					   % maxamino = length of 20 amino acid
-%
-%								if seq_b(num,j,:) == amino(z)  % match "seq_b mat" to amino acid value
-%
-%									%use for sum[x*y] step
-%									fj(num,j) = value(z);	    %value of amino acid info fj
-%
-%									%use for correlation (y^2) and (y)^2
-%									fjdoub(num,j)= value(z)*value(z); %square of amino acid value
-%
-%									%disp(fj);
-%									%use for sum[x*y] step
-%									fjsum(j) = sum(fj(:,j));
-%									fjdoubsum(j) = sum(fjdoub(:,j));	    %sum(y^2)
-%									fjsumdoub(j) = sum(fj(:,j))^2;          %sum(y)^2
-%
-%								end
-%						end
-%				end
-%	end
-
-
 
 
 %%%% determine for sum of expected value of (x*y) = fi(ii)*fj(jj)
@@ -258,10 +206,9 @@ jj=0;
 			end
 
 
-%%%least sqaure fit of data%%%%%%%%%%%%%%%%%%%
+
 %%%correlation coefficient %%%%%%%%%%%%%%%%%%%
 %%%conserved position analysis%%%%%%%%%%%%%%%%
-
 %%% determination of (xi-meanx)
 %%%( x-meanx)^2/numtotal-1 (variance values)
 
@@ -573,23 +520,3 @@ fprintf(fileID1, [repmat('%d,', 1, size(SCRASP, 2)), '\n'], SCRASP');
         colormap(cmap)
         colorbar
 fclose(fileID1);
-
-
-%use for sum[x*y] step
-%fisum(i) = sum(fi(:,i));
-%fidoubsum(i) = sum(fidoub(:,i));	    %sum(x^2)
-%fisumdoub(i) = sum(fi(:,i))^2;          %sum(x)^2
-%fjdoubsum(j) = sum(fjdoub(:,j));        %sum(y^2)
-%fjsumdoub(j) = sum(fj(:,j))^2;          %sum(y)^2
-%%% variance of x and y is linear combinations of varx and vary 
-%var (x,y) = var(x)+ var(y) - 2cov(x,y)
-%significance analysis of conserved residues (i,j)
-%variance single = sum(x- meanx)^2/N-1
-% variance of values. 
-%In the special case of Y=X,
-%var(X)		=	sigma_X^2
-%var(x+y) = cov(x,x) + cov(y,y) -2cov(x,y) = (sum(x^2) - (sumx)^2)-(sum(y^2) -(sumy)^2)-2*cov(xy)
-%varx_y(1,ii) = sum(varxy)/(length(pval1(:,1))-1);    %varx or vary at each position.
-%pause;
-%all(ismember(A(:,1),B(:,1))
-%all(sort(A(:,1))==sort(B(:,2)))

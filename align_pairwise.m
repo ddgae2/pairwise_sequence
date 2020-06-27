@@ -7,8 +7,9 @@ function align_pairwise = align_pairwise(seq1,score,a,b,c,d)
 % for string use '%c'
 %physiochemical values are based following papers.
 %1. READ this paper! The structure of proteins: packng of alpha-helices and pleated sheets. you will see that these type of interaction exist in nature.  
-%C. Chothia, M. Levitt and D. Richardson. PNAS. Vol 74. 1977
-%2. Volume (Chothia 1984).
+%C. Chothia, M. Levitt and D. Richardson. (1977) PNAS. Vol 74. p. 4130-4134
+%Conformation of amino acid side-chains in proteins. J. Janin and S. Wodak, 
+%M. Levitt and B. Maigret. J. Mol. Biol. (1978) 125 357-386. 
 %3. Annu. Rev. Biochem. (1984) 53 537-572.
 
 

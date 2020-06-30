@@ -6,11 +6,12 @@ function align_pairwise = align_pairwise(seq1,score,a,b,c,d)
 %correlation analysis of position- i,j amino acids in multiple sequence alignment. 
 % for string use '%c'
 %physiochemical values are based following papers.
-%1. READ this paper! The structure of proteins: packng of alpha-helices and pleated sheets. you will see that these type of interaction exist in nature.  
-%C. Chothia, M. Levitt and D. Richardson. (1977) PNAS. Vol 74. p. 4130-4134
-%Conformation of amino acid side-chains in proteins. J. Janin and S. Wodak, 
-%M. Levitt and B. Maigret. J. Mol. Biol. (1978) 125 357-386. 
-%3. Annu. Rev. Biochem. (1984) 53 537-572.
+% 1. READ this paper! The structure of proteins: packng of alpha-helices and pleated sheets. you will see that these type of interaction exist in nature.  
+% C. Chothia, M. Levitt and D. Richardson. (1977) PNAS. Vol 74. p. 4130-4134
+% 2. Conformation of amino acid side-chains in proteins. 
+% J. Janin and S. Wodak, M. Levitt and B. Maigret. J. Mol. Biol. (1978) 125 357-386. 
+% C. Chothia Annu. Rev. Biochem. (1984) 53 537-572. 
+% 3. Principles that determine the structure of proteins
 
 
 [value, amin]= textread(score, '%f %c', 20);
@@ -156,6 +157,7 @@ jj=0;
 
 
 %t-test- significance of bell-shape samples.
+%may not be useful only for statstical purpose. 
 %initialize
 	ii=0;
 	jj=0;
@@ -335,7 +337,6 @@ cnt=0;
 
 
 %FOR conserved positions only where, variance of x and y is zero.
-%least sqt fit is prefect.
 %SR2 equal to 1.
 ii=0;
 jj=0;
@@ -359,9 +360,9 @@ jj=0;
 
 
 %coefficient of determination R2
-%%least sqaure fit coeff b= Saddxy/SSx
-%%least square fit coeff b'' = Saddxy/SSy 
-%% least squart fit coeff  r2= Saddxy^2/(SSx*SSy) 
+%%least coeff b= Saddxy/SSx
+%%least  coeff b'' = Saddxy/SSy 
+%%least  coeff  r2= Saddxy^2/(SSx*SSy) 
 %% r2 = b*b''
 
 %initialize

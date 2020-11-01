@@ -2,6 +2,7 @@
 function align_pairwise = align_pairwise(seq1,score,a,b,c,d)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%copyright © 2012 David gae all rights reserved
 % David Gae 2/21/12 UC DAVIS in computational structural biology lab ( Koehl lab, genome center) 
 %correlation analysis of position- i,j amino acids in multiple sequence alignment. 
 % for string use '%c'

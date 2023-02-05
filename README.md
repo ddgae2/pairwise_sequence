@@ -7,8 +7,8 @@ Running sequence comparision at position i and j based on physiochemical score: 
      Average Volume per residue taken from Ann. Rev. Biochem. (1984) 53, 537-72.<br>
  3)  Conformation of amino acid side-chains in proteins <br>
      JMB (1978) 124, 357-386 <br>
- 3)  Code is based on this great paper: Dmitry A. Afonnikov and Nikolay A. Kolchanov. CRASP: a program for analysis of   
-     coordinated substitutions in multiple alignments of protein sequence. Nucleic acids res.(2004) W64-W67.<br>
+ 3)  Code is based on this great paper: DNucleic acids res.(2004) W64-W67.<br
+     CRASP: a program for analysis ofcoordinated substitutions in multiple alignments of protein sequence. 
  
      
  <div>
